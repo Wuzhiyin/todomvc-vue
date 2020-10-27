@@ -53,6 +53,11 @@
 		          item.completed = checked
 		        })
 		    },
+
+		    handleRemoveTodoClick(index, e) {
+		        this.todos.splice(index, 1)
+		    },
+		    
 		}
 	}).$mount('#app')
 })();

@@ -18,6 +18,7 @@
 				placeholder="What needs to be done?" autofocus>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
+			<template v-if="todos.length">
 			<section class="main">
 				<input 
 				id="toggle-all" 
@@ -37,11 +38,16 @@
 					<li :class="{
               				completed: item.completed
               			}" 
-              			v-for="item in todos">
+              			v-for="(item, index) in todos">
 						<div class="view">
 							<input class="toggle" v-model="item.completed" type="checkbox">
 							<label>{{ item.title }}</label>
-							<button class="destroy"></button>
+						<!--
+			                当事件处理函数没有传参的时候，第一个参数就是默认的事件源对象：event
+			                当手动传递了参数的时候，就没办法获取默认的 event 事件源对象
+			                这个时候我们可以手动在调用方法的时候传递 $event 来接收 event 事件源对象
+			            -->
+							<button class="destroy" @click="handleRemoveTodoClick(index, $event)"></button>
 						</div>
 						<input class="edit" value="Rule the web">
 					</li>
@@ -66,6 +72,7 @@
 				<!-- Hidden if no completed items are left ↓ -->
 				<button class="clear-completed">Clear completed</button>
 			</footer>
+			</template>
 		</section>
 		<footer class="info">
 			<p>Double-click to edit a todo</p>
