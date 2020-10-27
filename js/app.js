@@ -20,7 +20,8 @@
 
 	new Vue({
 		data:{
-			todos
+			todos,
+			currentEditing: null
 		},
 		methods: {
 			handleNewTodoKeyDown(e) {
@@ -59,6 +60,10 @@
 		        this.todos.splice(index, 1)
 		    },
 
+		    handleGetEditingDblclick(todo) {
+		        // 把这个变量等于当前双击的 todo
+		        this.currentEditing = todo
+	      	},
 		}
 	}).$mount('#app')
 })();

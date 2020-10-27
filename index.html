@@ -35,13 +35,19 @@
 			              已完成：completed
 			              编辑：editing
 			        -->
+			        <!--
+			            当我双击的时候，我就把 currentEditing = 当前双击的这个任务项
+			            每个任务项 class 的 editing 都有一个判定：如果 currentEditing === 我自己 ，则该任务项就获得 editing 样式
+           			-->
 					<li :class="{
-              				completed: item.completed
+              				completed: item.completed,
+              				editing: currentEditing === item
               			}" 
               			v-for="(item, index) in todos">
 						<div class="view">
 							<input class="toggle" v-model="item.completed" type="checkbox">
-							<label>{{ item.title }}</label>
+							<label
+							 @dblclick="handleGetEditingDblclick(item)">{{ item.title }}</label>
 						<!--
 			                当事件处理函数没有传参的时候，第一个参数就是默认的事件源对象：event
 			                当手动传递了参数的时候，就没办法获取默认的 event 事件源对象
