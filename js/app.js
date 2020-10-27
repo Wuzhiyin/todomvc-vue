@@ -37,7 +37,8 @@
 		        }
 		        const todos = this.todos
 		        todos.push({
-		          id: todos[todos.length - 1].id + 1,
+ 				  // 如果数组是空的就给 1 ，否则就是最后一个元素的 id + 1
+          		  id: todos.length ? todos[todos.length - 1].id + 1 : 1,
 		          title: value,
 		          completed: false
 		        })
@@ -57,7 +58,7 @@
 		    handleRemoveTodoClick(index, e) {
 		        this.todos.splice(index, 1)
 		    },
-		    
+
 		}
 	}).$mount('#app')
 })();
