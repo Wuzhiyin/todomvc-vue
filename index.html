@@ -55,7 +55,13 @@
 			            -->
 							<button class="destroy" @click="handleRemoveTodoClick(index, $event)"></button>
 						</div>
-						<input class="edit" value="Rule the web">
+						<input class="edit" 
+						:value="item.title" 
+						@keydown.enter="handleSaveEditKeydown(item, index, $event)" 
+              			@blur="handleSaveEditKeydown(item, index, $event)"
+              			
+              
+						>
 					</li>
 				</ul>
 			</section>
