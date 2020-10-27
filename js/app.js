@@ -89,7 +89,30 @@
 		        this.currentEditing = null
 	      	},
 
-	      	
+	      	handleClearAllDoneClick() {
+		        // 错误的写法
+		        // this.todos.forEach((item, index) => {
+		        //   if (item.completed) {
+		        //     this.todos.splice(index, 1)
+		        //   }
+		        // })
+
+		        // 手动控制遍历索引的方式
+		        // for (let i = 0; i < this.todos.length; i++) {
+		        //   if (this.todos[i].completed) {
+		        //     this.todos.splice(i, 1)
+		        //     // 删除元素之后，让我们遍历的这个 小索引 往后倒退一次，
+		        //     // 因为你删除之后，后面的所有元素的索引都会倒退一次
+		        //     // 纠正索引的遍历
+		        //     i--
+		        //   }
+		        // }
+
+		        // 过滤结果的方式
+		        // 我们这里还有一种办法也很简单
+		        // 我们把需要的结果给过滤出来重新赋值到 todos 中
+		        this.todos = this.todos.filter(t => !t.completed)
+		    },
 		}
 	}).$mount('#app')
 })();
