@@ -1,6 +1,26 @@
-(function (window) {
-	'use strict';
+;(function () {
 
-	// Your starting point. Enjoy the ride!
+	const todos = [
+		{
+			id: 1,
+			title: '吃饭',
+			completed: true
+		},
+		{
+			id: 2,
+			title: '睡觉',
+			completed: true
+		},
+		{
+			id: 3,
+			title: '敲代码',
+			completed: false
+		},
+	]
 
-})(window);
+	new Vue({
+		data:{
+			todos
+		}
+	}).$mount('#app')
+})();
