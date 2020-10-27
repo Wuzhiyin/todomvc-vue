@@ -47,6 +47,28 @@
 	        }
 	      },
 
+	      toggleAllStat: {
+	        get () {
+	          // 计算属性知道它依赖了 todos
+	          // 当 todos 发生变化，计算属性会重新计算
+	          return this.todos.every(t => t.completed)
+	        },
+	        set () {
+	          // 表单控件 checkbox 双向绑定了 toggleAllStat
+	          // 所以 checkbox 的变化会调用 set 方法
+	          // 在 set 方法中我们要做的就是
+	          //    1. 得到当前 checkbox 的选中状态
+	          //    2. 把所有任务项的选项状态都设置为 toggle-all 的选中状态
+
+	          // 在自己的 set 方法中访问自己就是调用自己 get 方法
+	          // console.log(this.toggleAllStat)
+	          const checked = !this.toggleAllStat
+	          this.todos.forEach(item => {
+	            item.completed = checked
+	          })
+	        }
+	      },
+
 		},
 
 		methods: {
