@@ -43,6 +43,16 @@
 		        })
 		        target.value = ''
 	      	},
+
+	      	handleToggleAllChange(e) {
+		        // 0. 绑定 checkbox 的 change 事件
+		        // 1. 获取 checkbox 的选中的状态
+		        // 2. 直接循环所有的子任务项的选中状态设置为 toggleAll 的状态
+		        const checked = e.target.checked
+		        this.todos.forEach(item => {
+		          item.completed = checked
+		        })
+		    },
 		}
 	}).$mount('#app')
 })();
