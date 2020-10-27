@@ -67,7 +67,22 @@
 			<!-- This footer should hidden by default and shown when there are todos -->
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>0</strong> item left</span>
+		        <!--
+		          在模板中放入太多的逻辑会让模板过重且难以维护
+		          当你想要在模板中多次引用此处功能时，就会更加难以处理。
+		          所以，对于任何复杂逻辑，你都应当使用计算属性。
+
+		          1. 使用方法可以把这种复杂逻辑封装起来
+		             每使用一次就调用一次，重复使用效率不高
+		          2. 使用计算属性
+		              1. 不要让模板逻辑太重
+		              2. 解决性能问题
+		         -->
+		        <!-- <span class="todo-count"><strong>{{ todos.filter(t => !t.completed).length }}</strong> item left</span> -->
+		        <!-- <span class="todo-count"><strong>{{ getRemaningCount() }}</strong> item left</span>
+		        <span class="todo-count"><strong>{{ getRemaningCount() }}</strong> item left</span> -->
+
+				<span class="todo-count"><strong>{{ remaningCount }}</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>

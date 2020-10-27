@@ -23,6 +23,32 @@
 			todos,
 			currentEditing: null
 		},
+
+		// 计算属性是 Vue 提供的一大特色
+	    // 顾名思义：一种带有行为的属性，本质是方法，但是不能当作方法来调用，必须当作属性来使用
+	    // 它相比方法的优势就在于会缓存计算的结果，效率很高
+	    // 计算属性只能当作属性来使用，不能用于事件处理函数
+		computed: {
+		  // 该成员就是一个方法，但是在使用的时候必须当作属性来用，不能调用
+	      // 简写方式，一个函数，作为 get 方法
+	      // remaningCount () {
+	      //   console.log('remaningCount 属性方法被调用了')
+	      //   return this.todos.filter(t => !t.completed).length
+	      // }
+	      remaningCount: {
+	        // 当你访问 remaningCount 会自动调用 get 方法
+	        get () {
+	          return this.todos.filter(t => !t.completed).length
+	        },
+	        // 当你 实例.remaningCount = xxx 的时候会自动调用 set 方法
+	        // 注意：这里只是为了演示语法
+	        set () {
+	          console.log('remaningCount 的 set 方法被调用了')
+	        }
+	      },
+
+		},
+
 		methods: {
 			handleNewTodoKeyDown(e) {
 		        // 0. 注册按下的回车事件
@@ -113,6 +139,13 @@
 		        // 我们把需要的结果给过滤出来重新赋值到 todos 中
 		        this.todos = this.todos.filter(t => !t.completed)
 		    },
+
+		    // 获取剩余的任务数量
+		    // 后来把这个方法改为了计算属性
+		    getRemaningCount() {
+		        console.log(111)
+		        return this.todos.filter(t => !t.completed).length
+	      	}	
 		}
 	}).$mount('#app')
 })();
