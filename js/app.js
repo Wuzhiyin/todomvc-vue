@@ -84,6 +84,11 @@
 		        }
 	      	},
 
+	      	handleCancelEditEsc() {
+		        // 1. 把样式给去除
+		        this.currentEditing = null
+	      	},
+
 	      	
 		}
 	}).$mount('#app')

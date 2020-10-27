@@ -59,8 +59,7 @@
 						:value="item.title" 
 						@keydown.enter="handleSaveEditKeydown(item, index, $event)" 
               			@blur="handleSaveEditKeydown(item, index, $event)"
-              			
-              
+              			 @keydown.esc="handleCancelEditEsc"
 						>
 					</li>
 				</ul>
