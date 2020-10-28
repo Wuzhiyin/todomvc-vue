@@ -1,26 +1,26 @@
 ;(function () {
 
-	const todos = [
-		{
-			id: 1,
-			title: '吃饭',
-			completed: true
-		},
-		{
-			id: 2,
-			title: '睡觉',
-			completed: true
-		},
-		{
-			id: 3,
-			title: '敲代码',
-			completed: false
-		},
-	]
+	// const todos = [
+	// 	{
+	// 		id: 1,
+	// 		title: '吃饭',
+	// 		completed: true
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: '睡觉',
+	// 		completed: true
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		title: '敲代码',
+	// 		completed: false
+	// 	},
+	// ]
 
-	new Vue({
+	window.app = new Vue({
 		data:{
-			todos,
+			todos: JSON.parse(window.localStorage.getItem('todos') || '[]'),
 			currentEditing: null
 		},
 
@@ -69,6 +69,24 @@
 	        }
 	      },
 
+		},
+
+		watch: {
+			// 监视 todos 的改变，当 todos 发生变化的时候做业务定制处理
+			// 引用类型只能监视一层，无法监视内部成员的子成员的改变
+			todos: {
+				// 当监视到 todos 改变的时候会自动调用 handler 方法
+				// 你监视的谁，val 就是谁
+				// val 的变化之后的最新值
+				// oldVal 是变化之前的值
+				handler (val, oldVal) {
+					// 监视到 todos 变化，把 todos 本次存储记录数据的状态
+					// 这里既可以通过 this.todos 来访问，也可以通过 val 来得到最新的 todos
+					window.localStorage.setItem('todos', JSON.stringify(val))
+				},
+				deep: true, // 深度监视，只有这样才能监视到数组或者对象孩子...孩子... 成员的改变
+				// immediate: true // 无乱变化与否，你上来就给我调用一次，如何使用看需求
+			}
 		},
 
 		methods: {
