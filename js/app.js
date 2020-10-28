@@ -17,6 +17,25 @@
 		}
 	})
 
+
+	// 该指令被作用到了所有 li 中的 input 上了
+	// 每当模板更新的时候，这些指令都会执行
+	// 我在指令中就可以得到作用该指令的 DOM 元素
+	// DOM 元素是谁？input
+	// 如何知道双击了哪个任务项，从而找到 input
+	// 这才是更 Vue 的代码，否则不会用的人写出来的代码就不够 Vue
+	// 搞学习要较真儿，但是工作的时候别较真儿
+	Vue.directive('todo-focus', {
+		update (el, binding) {
+			// console.log('todo-focus 指令所在模板更新了', el)
+			// el.focus()
+			console.log(binding.value) // currentEditing === item
+			if (binding.value) {
+				el.focus()
+			}
+		}
+	})
+
 	window.app = new Vue({
 		data:{
 			todos: JSON.parse(window.localStorage.getItem('todos') || '[]'),

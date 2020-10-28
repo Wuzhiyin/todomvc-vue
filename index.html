@@ -83,6 +83,7 @@
 						@keydown.enter="handleSaveEditKeydown(item, index, $event)" 
               			@blur="handleSaveEditKeydown(item, index, $event)"
               			 @keydown.esc="handleCancelEditEsc"
+						v-todo-focus="currentEditing === item"
 						>
 					</li>
 				</ul>
