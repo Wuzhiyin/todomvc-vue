@@ -1,5 +1,21 @@
 ;(function () {
-
+	// 我们需要让我们的 input 一上来就聚焦一次，以后不需要了
+	// 所以我们这里就需要使用 bind 或者 inserted 钩子
+	Vue.directive('focus', {
+		// bind (el, binding) {
+		//   console.log(el)
+		//   // el.focus()
+		//   // 你在这里可以该样式等其它操作
+		//   // 但是唯一不能做的就是聚焦
+		//   // 聚焦不能写在 bind 钩子函数
+		//   el.style.color = 'red'
+		// }
+		// 当被绑定的元素插入到 DOM 中时……
+		inserted: function (el) {
+			// 聚焦元素
+			el.focus()
+		}
+	})
 
 	window.app = new Vue({
 		data:{

@@ -13,7 +13,8 @@
 		<section class="todoapp" id="app">
 			<header class="header">
 				<h1>任务清单</h1>
-				<input class="new-todo" 
+				<input class="new-todo"
+					v-focus
 					@keydown.enter="handleNewTodoKeyDown"
 				placeholder="What needs to be done?" autofocus>
 			</header>
