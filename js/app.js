@@ -1,27 +1,11 @@
 ;(function () {
 
-	// const todos = [
-	// 	{
-	// 		id: 1,
-	// 		title: '吃饭',
-	// 		completed: true
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		title: '睡觉',
-	// 		completed: true
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		title: '敲代码',
-	// 		completed: false
-	// 	},
-	// ]
 
 	window.app = new Vue({
 		data:{
 			todos: JSON.parse(window.localStorage.getItem('todos') || '[]'),
-			currentEditing: null
+			currentEditing: null,
+			filterText: 'all'
 		},
 
 		// 计算属性是 Vue 提供的一大特色
@@ -69,6 +53,28 @@
 	        }
 	      },
 
+			filterTodos () {
+				// all
+				// return this.todos
+
+				// active
+				// return this.todos.filter(t => !t.completed)
+
+				// completed
+				// return this.todos.filter(t => t.completed)
+
+				switch(this.filterText) {
+					case 'active':
+						return this.todos.filter(t => !t.completed)
+						break
+					case 'completed':
+						return this.todos.filter(t => t.completed)
+						break
+					default:
+						return this.todos
+						break
+				}
+			}
 		},
 
 		watch: {
@@ -188,4 +194,15 @@
 	      	}	
 		}
 	}).$mount('#app')
+
+	// 页面初始化的时候调用一次，保持过滤状态
+	handlehashchange()
+
+	// 该事件在页面初始化的时候不会执行，只有 change 的才会执行
+	// 注册 hash（锚点） 的改变事件
+	window.onhashchange = handlehashchange
+
+	function handlehashchange() {
+		app.filterText = window.location.hash.substr(2)
+	}
 })();

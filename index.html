@@ -65,7 +65,7 @@
               				completed: item.completed,
               				editing: currentEditing === item
               			}" 
-              			v-for="(item, index) in todos">
+              			v-for="(item, index) in filterTodos">
 						<div class="view">
 							<input class="toggle" v-model="item.completed" type="checkbox">
 							<label
